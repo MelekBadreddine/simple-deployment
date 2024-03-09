@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: flask-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: flask-app
+  template:
+    metadata:
+      labels:
+        app: flask-app
+    spec:
+      containers:
+        - name: flask-app
+          image: flask-app:latest
+          ports:
+            - containerPort: 5000
+          resources:
+            limits:
+              cpu: "1" # Limit CPU usage to 1 core
+              memory: "1024Mi" # Limit memory usage to 1024MB
+            requests:
+              cpu: "0.5" # Request at least 0.5 cores of CPU
+              memory: "512Mi" # Request at least 512MB of memory
